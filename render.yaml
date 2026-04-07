@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: smart-classroom-polling-app
+    env: node
+    region: oregon # Or appropriate region like frankfurt, ohio, singapore
+    plan: free # Change if you want a paid plan
+    branch: main
+    buildCommand: npm install && npm run build
+    startCommand: npx tsx server.ts
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: APP_URL
+        value: "" # We can set this later
+      - key: JWT_SECRET
+        generateValue: true
+      - key: GEMINI_API_KEY
+        sync: false # Requires manually setting in dashboard as we don't want it in code
